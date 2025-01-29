@@ -1,0 +1,55 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        // Ask the user for the number of elements
+        Console.Write("Enter the number of elements: ");
+        int n = int.Parse(Console.ReadLine());
+
+        // Create a list to store even and odd numbers dynamically
+        var evens = new System.Collections.Generic.List<int>();
+        var odds = new System.Collections.Generic.List<int>();
+
+        // Get numbers from the user
+        Console.WriteLine("Enter the numbers:");
+        for (int i = 0; i < n; i++)
+        {
+            Console.Write($"Element - {i}: ");
+            int number = int.Parse(Console.ReadLine());
+
+            // Check if the number is even or odd
+            if (number % 2 == 0)
+            {
+                evens.Add(number);
+            }
+            else
+            {
+                odds.Add(number);
+            }
+        }
+
+        // Display even numbers
+        Console.WriteLine("The Even numbers are:");
+        if (evens.Count > 0)
+        {
+            Console.WriteLine(string.Join(" ", evens));
+        }
+        else
+        {
+            Console.WriteLine("No even numbers entered.");
+        }
+
+        // Display odd numbers
+        Console.WriteLine("The Odd numbers are:");
+        if (odds.Count > 0)
+        {
+            Console.WriteLine(string.Join(" ", odds));
+        }
+        else
+        {
+            Console.WriteLine("No odd numbers entered.");
+        }
+    }
+}
