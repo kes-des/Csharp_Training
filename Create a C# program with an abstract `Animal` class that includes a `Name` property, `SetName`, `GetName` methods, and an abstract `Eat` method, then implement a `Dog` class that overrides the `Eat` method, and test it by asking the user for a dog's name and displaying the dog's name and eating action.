@@ -1,0 +1,53 @@
+using System;
+
+public abstract class Animal
+{
+    // Property to hold the name of the animal
+    public string Name { get; set; }
+
+    // Method to set the name of the animal
+    public void SetName(string name)
+    {
+        Name = name;
+    }
+
+    // Method to get the name of the animal
+    public string GetName()
+    {
+        return Name;
+    }
+
+    // Abstract method Eat, which must be implemented in the derived class
+    public abstract void Eat();
+}
+
+public class Dog : Animal
+{
+    // Implementing the abstract Eat method for Dog class
+    public override void Eat()
+    {
+        Console.WriteLine("The dog is eating.");
+    }
+}
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        // Asking the user for the dog's name
+        Console.WriteLine("Enter the dog's name:");
+        string dogName = Console.ReadLine();
+
+        // Creating a new Dog object
+        Dog dog = new Dog();
+
+        // Setting the dog's name
+        dog.SetName(dogName);
+
+        // Displaying the dog's name
+        Console.WriteLine("The dog's name is: " + dog.GetName());
+
+        // Making the dog eat
+        dog.Eat();
+    }
+}
