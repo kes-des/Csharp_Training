@@ -1,0 +1,29 @@
+using System;
+public class FunctionAddArrayIntegers
+{
+    public static void Main(string[] args)
+    {
+        int total = 5;
+        int[] numbers = new int[total];
+ 
+        for (int i = 0; i < total; i++)
+        {
+            numbers[i] = Convert.ToInt32(Console.ReadLine());
+        }
+ 
+        int sum = Sum(numbers);
+        Console.WriteLine(sum);
+    }
+ 
+    public static int Sum(int[] numbers)
+    {
+        int sum = 0;
+ 
+        for (int i = 0; i < numbers.Length; i++)
+        {
+            sum += numbers[i];
+        }
+ 
+        return sum;
+    }
+}
