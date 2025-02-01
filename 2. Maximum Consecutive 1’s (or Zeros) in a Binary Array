@@ -1,0 +1,29 @@
+using System;
+
+public class Program
+{
+    public static void Main()
+    {
+        int[] arr = { 1, 1, 0, 0, 1, 0, 1, 0, 1, 1, 1, 1 };
+        Console.WriteLine(MaxConsecutiveOnes(arr)); // Output: 4
+    }
+
+    public static int MaxConsecutiveOnes(int[] arr)
+    {
+        int maxCount = 0, currentCount = 0;
+        
+        foreach (int num in arr)
+        {
+            if (num == 1)
+            {
+                currentCount++;
+                maxCount = Math.Max(maxCount, currentCount);
+            }
+            else
+            {
+                currentCount = 0;
+            }
+        }
+        return maxCount;
+    }
+}
