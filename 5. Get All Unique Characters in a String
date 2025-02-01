@@ -1,0 +1,28 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main()
+    {
+        string input = "google";
+        Console.WriteLine(GetUniqueChars(input)); // Output: "gole"
+    }
+
+    public static string GetUniqueChars(string str)
+    {
+        HashSet<char> seen = new HashSet<char>();
+        List<char> uniqueChars = new List<char>();
+
+        foreach (char c in str)
+        {
+            if (!seen.Contains(c))
+            {
+                seen.Add(c);
+                uniqueChars.Add(c);
+            }
+        }
+
+        return new string(uniqueChars.ToArray());
+    }
+}
