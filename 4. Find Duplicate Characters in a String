@@ -1,0 +1,31 @@
+using System;
+using System.Collections.Generic;
+
+public class Program
+{
+    public static void Main()
+    {
+        string input = "google";
+        Console.WriteLine(FindDuplicateChars(input)); // Output: "og"
+    }
+
+    public static string FindDuplicateChars(string str)
+    {
+        HashSet<char> seen = new HashSet<char>();
+        HashSet<char> duplicates = new HashSet<char>();
+        
+        foreach (char c in str)
+        {
+            if (seen.Contains(c))
+            {
+                duplicates.Add(c);
+            }
+            else
+            {
+                seen.Add(c);
+            }
+        }
+        
+        return new string(new List<char>(duplicates).ToArray());
+    }
+}
