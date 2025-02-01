@@ -1,0 +1,120 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+
+public class Network
+{
+    public int ID { get; set; }
+    public long Source { get; set; }
+    public long Destination { get; set; }
+    public string Date { get; set; }
+    public string Time { get; set; }
+    public string Status { get; set; }
+    public string Network { get; set; }
+
+    // Constructor to initialize the properties
+    public Network(int id, long source, long destination, string date, string time, string status, string network)
+    {
+        ID = id;
+        Source = source;
+        Destination = destination;
+        Date = date;
+        Time = time;
+        Status = status;
+        Network = network;
+    }
+}
+
+class Airtel : Network
+{
+    public Airtel(int id, long source, long destination, string date, string time, string status, string network) 
+        : base(id, source, destination, date, time, status, network) { }
+}
+
+class Idea : Network
+{
+    public Idea(int id, long source, long destination, string date, string time, string status, string network) 
+        : base(id, source, destination, date, time, status, network) { }
+}
+
+class Program
+{
+    static List<Network> records = new List<Network>();
+
+    public static void Main()
+    {
+        // Reading data from the file
+        ReadDataFromFile("network_data.txt");
+
+        // Displaying all records
+        DisplayRecords();
+
+        // User input for searching records
+        Console.WriteLine("Enter search criteria (ID, Source, Destination, Status, Network):");
+        string input = Console.ReadLine().ToLower();
+
+        // Filtering the records based on user input
+        var filteredRecords = records.Where(r => r.ID.ToString().Contains(input) ||
+                                                  r.Source.ToString().Contains(input) ||
+                                                  r.Destination.ToString().Contains(input) ||
+                                                  r.Status.ToLower().Contains(input) ||
+                                                  r.Network.ToLower().Contains(input)).ToList();
+
+        // Displaying filtered records
+        if (filteredRecords.Any())
+        {
+            DisplayRecords(filteredRecords);
+        }
+        else
+        {
+            Console.WriteLine("No records found matching the criteria.");
+        }
+    }
+
+    // Method to read data from file
+    public static void ReadDataFromFile(string fileName)
+    {
+        try
+        {
+            foreach (var line in File.ReadLines(fileName))
+            {
+                var parts = line.Split(',');
+                if (parts.Length == 7)
+                {
+                    var record = new Network(
+                        int.Parse(parts[0]),
+                        long.Parse(parts[1]),
+                        long.Parse(parts[2]),
+                        parts[3],
+                        parts[4],
+                        parts[5],
+                        parts[6]
+                    );
+                    records.Add(record);
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error reading file: {ex.Message}");
+        }
+    }
+
+    // Method to display records in the specified format
+    public static void DisplayRecords(List<Network> recordsToDisplay = null)
+    {
+        if (recordsToDisplay == null)
+        {
+            recordsToDisplay = records;
+        }
+
+        Console.WriteLine("ID\tSource\t\tDestination\t\tDate\t\tTime\t\tStatus\t\tNetwork");
+        Console.WriteLine("***************************************************************************************");
+
+        foreach (var record in recordsToDisplay)
+        {
+            Console.WriteLine($"{record.ID}\t{record.Source}\t{record.Destination}\t{record.Date}\t{record.Time}\t{record.Status}\t{record.Network}");
+        }
+    }
+}
