@@ -1,0 +1,30 @@
+using System;
+
+public class Program
+{
+    public static void Main()
+    {
+        int[] arr = { 12, 35, 1, 10, 34, 1 };
+        Console.WriteLine(SecondLargest(arr)); // Output: 34
+    }
+
+    public static int SecondLargest(int[] arr)
+    {
+        int largest = -1, secondLargest = -1;
+
+        foreach (var num in arr)
+        {
+            if (num > largest)
+            {
+                secondLargest = largest;
+                largest = num;
+            }
+            else if (num < largest && num > secondLargest)
+            {
+                secondLargest = num;
+            }
+        }
+
+        return secondLargest == -1 ? -1 : secondLargest;
+    }
+}
